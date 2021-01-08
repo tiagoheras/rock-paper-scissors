@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="user-scoreboard"></div>
+    <div id="computer-scoreboard"></div>
+
+    <button onclick="game()">Start New game</button>
+    <script>
+
+        const userScoreboard = document.getElementById('user-scoreboard');
+        const computerScoreboard = document.getElementById('computer-scoreboard');
+
+        function computerPlay() {
+            const randomNumber = Math.round(Math.random() * 3);
+            if (randomNumber === 1) {
+                return 'rock';
+            } else if (randomNumber === 2) {
+                return 'paper';
+            } else {
+                return 'scissors';
+            }
+        }
+
+        function play(input) {
+            const userInput = input.toLowerCase();
+            const computerInput = computerPlay();
+
+            if (userInput === 'rock' && computerInput === 'scissors') {
+                return 'You win';
+            } else if (userInput === 'rock' && computerInput === 'paper') {
+                return 'You loose';
+            } else if (userInput === 'paper' && computerInput === 'rock') {
+                return 'You win';
+            } else if (userInput === 'paper' && computerInput === 'scissors') {
+                return 'You loose';
+            } else if (userInput === 'scissors' && computerInput === 'rock') {
+                return 'You loose';
+            } else if (userInput === 'scissors' && computerInput === 'paper') {
+                return 'You win';
+            } else if (userInput === computerInput) {
+                return "Tie";
+            } else {
+                return 'Something went wrong.';
+            }
+        }
+
+        function game() {
+            let userScore = 0;
+            let computerScore = 0
+
+            userScoreboard.innerHTML = `<h1>Your Score: ${userScore}</h1>`;
+            computerScoreboard.innerHTML = `<h1>Computer Score: ${computerScore}</h1>`;
+
+            while (userScore < 5 && computerScore < 5) {
+                let userInput = prompt("Rock, Paper or Scissors?");
+                const result = play(userInput);
+                if (result === 'You win') {
+                    userScore += 1;
+                } else if (result === 'You loose') {
+                    computerScore += 1;
+                } else if (result === 'Tie') {
+                    userScore += 0;
+                    computerScore += 0;
+                } else {
+                    console.log('error');
+                }
+                userScoreboard.innerHTML = `<h1>Your Score: ${userScore}</h1>`;
+            computerScoreboard.innerHTML = `<h1>Computer Score: ${computerScore}</h1>`;
+            }
+
+        }
+    </script>
+</body>
+
+</html>
